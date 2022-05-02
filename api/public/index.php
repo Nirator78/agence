@@ -1,5 +1,5 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
 use App\Controller\CategorieController;
 use App\Controller\ArticleController;
 
