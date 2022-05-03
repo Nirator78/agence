@@ -13,6 +13,7 @@ class DefaultModel extends Database
     public function findAll(): array
     {
         try {
+            // TODO: gérer la limit if le parametre http limit est set et est un numeric on ajoute un limit mysql
             $stmt = "SELECT * FROM $this->table;";
             $query = $this->pdo->query($stmt, \PDO::FETCH_CLASS, "App\Entity\\$this->entity");
 
