@@ -62,3 +62,13 @@ ADD COLUMN `email` VARCHAR(45) NULL AFTER `status`;
 
 ALTER TABLE `agence`.`bien` 
 CHANGE COLUMN `cheminée` `cheminee` TINYINT(4) NULL DEFAULT NULL ;
+ALTER TABLE `agence`.`bien` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+ALTER TABLE `agence`.`image` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+ALTER TABLE `agence`.`rdv` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+ALTER TABLE `agence`.`user` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+ALTER TABLE `agence`.`bien` 
+CHANGE COLUMN `superficie` `superficie` DECIMAL(10,2) NULL DEFAULT NULL ;
