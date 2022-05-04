@@ -1,61 +1,22 @@
 <?php
+
+use Core\Router\Router;
+use App\Security\ApiKeySecurity;
+
+define('ROOT', dirname(__DIR__));
+require ROOT ."/vendor/autoload.php";
+
+// header("Access-Control-Allow-Origin: http://127.0.0.1:5501");
+// Indique quels clients peuvent se connecter à l'api
 header("Access-Control-Allow-Origin: *");
-use App\Controller\CategorieController;
-use App\Controller\ArticleController;
+// Indique les headers autorisés par l'api
+header("Access-Control-Allow-Headers: content-type, token, Authorization");
+// Indique les request methods autorisées par l'api
+header("Access-Control-Allow-Methods: GET, PATCH, OPTIONS, POST, PUT, DELETE");
+// Indique le temps d'existence max de ces données. Cette information va être utilisée pour le cache
+header('Access-Control-Max-Age:1728000');
 
-define("ROOT", dirname(__DIR__));
-require ROOT . "/vendor/autoload.php";
-
-if (isset($_SERVER["PATH_INFO"])) {
-    $path = explode("/",$_SERVER["PATH_INFO"]);
-    if (isset($path[3])) {
-        $controllerName = "App\Controller\\".ucfirst($path[3]). "Controller";
-        $controller = new $controllerName;
-        switch ($_SERVER["REQUEST_METHOD"]) {
-            case "GET":
-                if (isset($path[4]) && is_numeric($path[4])) {
-                    $controller->single($path[4]);
-                } else {
-                    $controller->index();
-                }
-                break;
-            case "POST":
-                if(isset($path[4]) && is_string($path[4])) 
-                {
-                    $method = $path[4];
-                    $controller->$method();
-                }else{
-                    $controller->save();
-                }
-                break;
-            case "PUT" || "PATCH":
-                echo "i égal 2";
-                break;
-            case "DELETE":
-                echo "i égal 3";
-                break;
-        }
-    }
-} else {
-    // TODO: erreur si pas la route
+if (ApiKeySecurity::verifyApiKey()) {
+    require ROOT ."/Core/Router/Router.php";
+    Router::router();
 }
-
-/*
-if (isset($_SERVER["PATH_INFO"])) {
-    $path = explode("/",$_SERVER["PATH_INFO"]);
-    if (isset($path[3])) {
-        $controllerName = "App\Controller\\".ucfirst($path[3]). "Controller";
-        $controller = new $controllerName;
-
-        if (isset($path[4]) && is_numeric($path[4])) {
-            $controller->single($path[4]);
-        } elseif (isset($path[4]) && is_string($path[4])) {
-            $method = $path[4];
-            $controller->$method();
-        } else {
-            $controller->index();
-        }
-    }
-} else {
-    // TODO: erreur si pas la route
-}*/

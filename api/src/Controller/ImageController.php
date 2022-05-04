@@ -28,4 +28,11 @@ final class ImageController extends DefaultController {
         $lastId = $this->model->saveImage($_POST);
         $this->jsonResponse($this->model->find($lastId), 201);
     }
+
+    public function delete (int $id): void
+    {
+        if ($this->model->delete($id)) {
+            $this->jsonResponse("Image supprimé avec succés");
+        }
+    }
 }

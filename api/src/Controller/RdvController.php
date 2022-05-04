@@ -28,4 +28,11 @@ final class RdvController extends DefaultController {
         $lastId = $this->model->saveRdv($_POST);
         $this->jsonResponse($this->model->find($lastId), 201);
     }
+
+    public function delete (int $id): void
+    {
+        if ($this->model->delete($id)) {
+            $this->jsonResponse("Rdv supprimé avec succés");
+        }
+    }
 }
