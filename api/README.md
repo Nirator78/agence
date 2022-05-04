@@ -72,3 +72,8 @@ ALTER TABLE `agence`.`user`
 CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
 ALTER TABLE `agence`.`bien` 
 CHANGE COLUMN `superficie` `superficie` DECIMAL(10,2) NULL DEFAULT NULL ;
+CREATE TABLE `agence`.`client` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `company` VARCHAR(45) NOT NULL,
+  `apikey` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));

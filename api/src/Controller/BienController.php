@@ -28,4 +28,11 @@ final class BienController extends DefaultController {
         $lastId = $this->model->saveBien($_POST);
         $this->jsonResponse($this->model->find($lastId), 201);
     }
+
+    public function delete (int $id): void
+    {
+        if ($this->model->delete($id)) {
+            $this->jsonResponse("Bien supprimé avec succés");
+        }
+    }
 }

@@ -33,4 +33,11 @@ final class UserController extends DefaultController {
     {
         $this->jsonResponse($this->model->connectUser($_POST));
     }
+
+    public function delete (int $id): void
+    {
+        if ($this->model->delete($id)) {
+            $this->jsonResponse("Utilisateur supprimé avec succés");
+        }
+    }
 }
