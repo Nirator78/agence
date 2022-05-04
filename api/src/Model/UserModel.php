@@ -3,8 +3,7 @@
 namespace App\Model;
 
 use Core\Model\DefaultModel;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+use App\Security\JwTokenSecurity;
 
 /**
  * @method User[] findAll()
@@ -56,19 +55,15 @@ final class UserModel extends DefaultModel
         $userFind = $query->fetch(); 
 
         if ($userFind) {
-            $key = 'example_key';
-            
-            $token = JWT::encode((array) $userFind, $key, 'HS256');
-            // $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-
+            $token = (new JwTokenSecurity)->generateToken($userFind->jsonSerialize());
             return [
                 "user" => $userFind,
                 "token" => $token
             ];
         } else {
             return [
-                "message" => "Erreur lors de la connexion",
-                "code" => 400,
+                "message" => "Cet utilisateur n'est pas inscrit, veuillez vous inscrire", 
+                "code" => 400
             ];
         }
     }
