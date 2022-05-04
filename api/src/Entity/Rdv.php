@@ -111,6 +111,26 @@ class Rdv implements JsonSerializable
 
         return $this;
     }
+
+    /**
+     * Get the value of email
+     */ 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */ 
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
     
     public function jsonSerialize(): mixed{
         return [
@@ -118,7 +138,8 @@ class Rdv implements JsonSerializable
             "date" => $this->getDate(),
             "bien_id" => $this->getBien_id(),
             "user_id" => $this->getUser_id(),
-            "status" => $this->getStatus()
+            "status" => $this->getStatus(),
+            "email" => $this->getEmail()
         ];
     }
 }
