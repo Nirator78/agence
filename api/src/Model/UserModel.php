@@ -32,7 +32,7 @@ final class UserModel extends DefaultModel
     public function saveUser(array $user): ?int
     {
         $newUser = $user + $this->default;
-
+        $newUser['password'] = password_hash($newUser['password'], PASSWORD_DEFAULT);
         $stmt = "INSERT INTO $this->table (nom,prenom,email,tel,role,password) VALUES (:nom,:prenom,:email,:tel,:role,:password)";
         $prepare = $this->pdo->prepare($stmt);
 
@@ -49,12 +49,14 @@ final class UserModel extends DefaultModel
         $email = $identifiant["email"];
         $password = $identifiant["password"];
 
-        $stmt = "SELECT * FROM $this->table WHERE email = '$email' AND password= '$password'";
+        $stmt = "SELECT * FROM $this->table WHERE email = '$email'";
 
         $query = $this->pdo->query($stmt, \PDO::FETCH_CLASS, "App\Entity\\$this->entity");
         $userFind = $query->fetch(); 
-
-        if ($userFind) {
+var_dump($userFind->getPassword());
+var_dump($password);
+var_dump(password_verify($password, $userFind->getPassword()));
+        if ($userFind && password_verify($password, $userFind->getPassword())) {
             $token = (new JwTokenSecurity)->generateToken($userFind->jsonSerialize());
             return [
                 "user" => $userFind,
