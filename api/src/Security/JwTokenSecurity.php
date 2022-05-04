@@ -37,4 +37,16 @@ class JwTokenSecurity {
 
         return (array) JWT::decode($token, new Key(self::SIGNATURE, self::ALGO));
     }
+
+    public function tokenNeeded ($need)
+    {
+        $headers = getallheaders();
+        $token = $headers['token'];
+
+        if(!isset($token) && $need){
+            return false; 
+        }
+
+        return true;
+    }
 }
