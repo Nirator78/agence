@@ -3,6 +3,8 @@
 namespace App\Model;
 
 use Core\Model\DefaultModel;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 /**
  * @method User[] findAll()
@@ -40,6 +42,34 @@ final class UserModel extends DefaultModel
             return $this->pdo->lastInsertId($this->table);
         } else {
             $this->jsonResponse("Erreur lors de l'insersion d'un user", 400);
+        }
+    }
+
+    public function connectUser(array $identifiant)
+    {
+        $email = $identifiant["email"];
+        $password = $identifiant["password"];
+
+        $stmt = "SELECT * FROM $this->table WHERE email = '$email' AND password= '$password'";
+
+        $query = $this->pdo->query($stmt, \PDO::FETCH_CLASS, "App\Entity\\$this->entity");
+        $userFind = $query->fetch(); 
+
+        if ($userFind) {
+            $key = 'example_key';
+            
+            $token = JWT::encode((array) $userFind, $key, 'HS256');
+            // $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
+
+            return [
+                "user" => $userFind,
+                "token" => $token
+            ];
+        } else {
+            return [
+                "message" => "Erreur lors de la connexion",
+                "code" => 400,
+            ];
         }
     }
 }

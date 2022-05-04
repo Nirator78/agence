@@ -28,4 +28,9 @@ final class UserController extends DefaultController {
         $lastId = $this->model->saveUser($_POST);
         $this->jsonResponse($this->model->find($lastId), 201);
     }
+
+    public function login():void 
+    {
+        $this->jsonResponse($this->model->connectUser($_POST));
+    }
 }

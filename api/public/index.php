@@ -20,7 +20,13 @@ if (isset($_SERVER["PATH_INFO"])) {
                 }
                 break;
             case "POST":
-                $controller->save();
+                if(isset($path[4]) && is_string($path[4])) 
+                {
+                    $method = $path[4];
+                    $controller->$method();
+                }else{
+                    $controller->save();
+                }
                 break;
             case "PUT" || "PATCH":
                 echo "i égal 2";
