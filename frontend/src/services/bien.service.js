@@ -44,7 +44,7 @@ class BienService {
     ) {
         const bodyFormData = new FormData();
         bodyFormData.append('titre', payload.titre);
-        bodyFormData.append('prenom', payload.description);
+        bodyFormData.append('description', payload.description);
 
 
         return await axios.post(API_URL + '/bien?apikey=123456', bodyFormData,{ "Content-Type": "multipart/form-data" })

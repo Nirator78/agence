@@ -36,7 +36,6 @@ final class BienModel extends DefaultModel
     public function saveBien(array $bien): ?int
     {
         $newBien = $bien + $this->default;
-        var_dump($newBien);
 
         $stmt = "INSERT INTO $this->table (titre,description,type_achat,type_bien,prix,superficie,nbPiece,piscine,balcon,terrasse,cheminee) VALUES (:titre,:description,:type_achat,:type_bien,:prix,:superficie,:nbPiece,:piscine,:balcon,:terrasse,:cheminee)";
         $prepare = $this->pdo->prepare($stmt);
