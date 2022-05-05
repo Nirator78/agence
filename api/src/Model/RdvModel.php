@@ -16,7 +16,7 @@ final class RdvModel extends DefaultModel
         //"id",
         "date" => "",
         "user_id" => "",
-        "bien_id" => "",
+        "rdv_id" => "",
         "status" => "",
         "email" => "",
         "nom" => "",
@@ -43,5 +43,34 @@ final class RdvModel extends DefaultModel
         } else {
             $this->jsonResponse("Erreur lors de l'insersion d'un rdv", 400);
         }
+    }
+
+    /**
+     * Modifie un rdv de la database
+     * 
+     * @param int $id
+     * @param array $rdv
+     * @return ?int
+     */
+    public function updateRdv(int $id, array $rdv): bool
+    {
+        $rdvInBdd = $this->find($id);
+
+        $updatedRdv = $rdv + $rdvInBdd->jsonSerialize();
+        
+        $stmt = "
+            UPDATE $this->table SET
+            date = :date,
+            user_id = :user_id,
+            bien_id = :bien_id,
+            status = :status,
+            email = :email,
+            nom = :nom,
+            prenom = :prenom,
+            tel = :tel
+            WHERE id = :id
+        ";
+        $prepare = $this->pdo->prepare($stmt);
+        return $prepare->execute($updatedRdv);
     }
 }

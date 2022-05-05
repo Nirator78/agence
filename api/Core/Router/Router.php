@@ -36,17 +36,19 @@ class Router {
                         }
                         break;
                     case "PUT":
-                        if (isset($path[4]) && is_numeric($path[4])) {
-                            $controller->update($path[4]);
+                        parse_str(file_get_contents("php://input"), $_PUT);
+                        if (isset($path[4]) && !empty($_PUT)) {
+                            $controller->update($path[4], $_PUT);
                         } else {
-                            throw new \Exception("Id manquant", 400);
+                            throw new \Exception("Erreur lors de la modification, il manque des informations", 400);
                         }
                         break;
                     case "PATCH":
-                        if (isset($path[4]) && is_numeric($path[4])) {
-                            $controller->update($path[4]);
+                        parse_str(file_get_contents("php://input"), $_PATCH);
+                        if (isset($path[4]) && !empty($_PATCH)) {
+                            $controller->update($path[4], $_PATCH);
                         } else {
-                            throw new \Exception("Id manquant", 400);
+                            throw new \Exception("Erreur lors de la modification, il manque des informations", 400);
                         }
                         break;
                 }

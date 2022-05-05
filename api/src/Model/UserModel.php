@@ -68,4 +68,31 @@ final class UserModel extends DefaultModel
             ];
         }
     }
+
+    /**
+     * Modifie un user de la database
+     * 
+     * @param int $id
+     * @param array $user
+     * @return ?int
+     */
+    public function updateUser(int $id, array $user): bool
+    {
+        $userInBdd = $this->find($id);
+        
+        $updatedUser = $user + $userInBdd->jsonSerialize();
+        
+        $stmt = "
+            UPDATE $this->table SET
+            nom = :nom,
+            prenom = :prenom,
+            email = :email,
+            tel = :tel,
+            role = :role,
+            password = :password
+            WHERE id = :id
+        ";
+        $prepare = $this->pdo->prepare($stmt);
+        return $prepare->execute($updatedUser);
+    }
 }

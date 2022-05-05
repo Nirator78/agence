@@ -73,9 +73,7 @@ class Image implements JsonSerializable
     
     public function jsonSerialize(): mixed{
         return [
-            "id" => $this->getId(),
-            "url" => $this->getUrl(),
-            "bien_id" => $this->getBien_id()
+            "url" => $this->getUrl()
         ];
     }
 }
