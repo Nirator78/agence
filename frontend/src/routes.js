@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import Accueil from "./pages/Accueil";
 import Bien from "./pages/Bien";
+import GestionAgent from "./pages/GestionAgent";
 import GestionRendezVous from "./pages/GestionRendezVous";
 import Inscription from "./pages/Inscription";
 import Interface from "./pages/Interface";
@@ -20,7 +21,7 @@ const MAP_ROUTES = [
             },
             { index: true, path: "inscription", element: <Inscription /> },
             { index: true, path: "gestion-rendez-vous", element: <GestionRendezVous /> },
-            { index: true, path: "gestion-agent", element: <Inscription /> },
+            { index: true, path: "gestion-agent", element: <GestionAgent/> },
             { path:'*', element: <NotFound /> },    
         ]
     },
