@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FormBien from '../component/subForm/FormBien';
 import BienService from '../services/bien.service';
 
 export default function Accueil(props) {
@@ -47,6 +48,7 @@ export default function Accueil(props) {
                     Rechercher
                 </button>
             </div>
+            <FormBien></FormBien>
             <div className="grid md:grid-cols-3 sm:grid-cols-2">
                 {
                     biens?.map((item) => {  

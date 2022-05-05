@@ -23,13 +23,15 @@ class AuthService {
         localStorage.clear();
         window.location.reload();
     }
-    register(nom, prenom, email, password) {
-        // On crypte le mot de passe avant envoei api
+    register(nom, prenom, tel, email, password) {
+        const bodyFormData = new FormData();
+        bodyFormData.append('nom', nom);
+        bodyFormData.append('prenom', prenom);
+        bodyFormData.append('tel', tel);
+        bodyFormData.append('email', email);
+        bodyFormData.append('password', password);
 
-        return axios.post(API_URL + '/user?apikey=123456', {
-            nom, prenom, email, password
-
-        })
+        return axios.post(API_URL + '/user?apikey=123456', bodyFormData,{ "Content-Type": "multipart/form-data" })
             .then(response => {
                 return response.data;
             });

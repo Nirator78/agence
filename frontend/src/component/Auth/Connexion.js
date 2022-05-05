@@ -1,7 +1,7 @@
 import React from "react";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { FormControl, IconButton, Input, InputAdornment, InputLabel } from "@mui/material";
+import { FormControl, Input, InputLabel } from "@mui/material";
 import authService from "../../services/auth.service";
 
 
