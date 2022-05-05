@@ -29,6 +29,13 @@ final class UserController extends DefaultController {
         $this->jsonResponse($this->model->find($lastId), 201);
     }
 
+    public function update (int $id, array $user): void
+    {
+        if ($this->model->updateUser(id: $id, user: $user)) {
+            $this->jsonResponse($this->model->find($id));
+        }
+    }
+
     public function login():void 
     {
         $this->jsonResponse($this->model->connectUser($_POST));

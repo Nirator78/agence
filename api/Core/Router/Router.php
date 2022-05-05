@@ -36,10 +36,18 @@ class Router {
                         }
                         break;
                     case "PUT":
-                        echo "i égal 2";
+                        if (isset($path[4]) && is_numeric($path[4])) {
+                            $controller->update($path[4]);
+                        } else {
+                            throw new \Exception("Id manquant", 400);
+                        }
                         break;
                     case "PATCH":
-                        echo "i égal 2";
+                        if (isset($path[4]) && is_numeric($path[4])) {
+                            $controller->update($path[4]);
+                        } else {
+                            throw new \Exception("Id manquant", 400);
+                        }
                         break;
                 }
             }
