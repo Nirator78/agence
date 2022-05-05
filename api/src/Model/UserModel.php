@@ -69,36 +69,30 @@ final class UserModel extends DefaultModel
         }
     }
 
-
     /**
-     * Modifie un bien de la database
+     * Modifie un user de la database
      * 
      * @param int $id
-     * @param array $bien
+     * @param array $user
      * @return ?int
      */
-    public function updateBien(int $id, array $bien): bool
+    public function updateUser(int $id, array $user): bool
     {
-        $bienInBdd = $this->find($id);
-
-        $updatedBien = $bien + $bienInBdd->jsonSerialize();
+        $userInBdd = $this->find($id);
+        
+        $updatedUser = $user + $userInBdd->jsonSerialize();
         
         $stmt = "
             UPDATE $this->table SET
-            titre = :titre,
-            description = :description,
-            type_achat = :type_achat,
-            type_bien = :type_bien,
-            prix = :prix,
-            superficie = :superficie,
-            nbPiece = :nbPiece,
-            piscine = :piscine,
-            balcon = :balcon,
-            terrasse = :terrasse,
-            cheminee = :cheminee
+            nom = :nom,
+            prenom = :prenom,
+            email = :email,
+            tel = :tel,
+            role = :role,
+            password = :password
             WHERE id = :id
         ";
         $prepare = $this->pdo->prepare($stmt);
-        return $prepare->execute($updatedBien);
+        return $prepare->execute($updatedUser);
     }
 }

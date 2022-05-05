@@ -45,7 +45,6 @@ final class RdvModel extends DefaultModel
         }
     }
 
-
     /**
      * Modifie un rdv de la database
      * 
