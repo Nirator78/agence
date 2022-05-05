@@ -32,10 +32,11 @@ final class UserModel extends DefaultModel
     public function saveUser(array $user): ?int
     {
         $newUser = $user + $this->default;
+        
         $newUser['password'] = password_hash($newUser['password'], PASSWORD_DEFAULT);
         $stmt = "INSERT INTO $this->table (nom,prenom,email,tel,role,password) VALUES (:nom,:prenom,:email,:tel,:role,:password)";
         $prepare = $this->pdo->prepare($stmt);
-
+        
         if ($prepare->execute($newUser)) {
             // récupéré l'id du dernier ajout a la bdd
             return $this->pdo->lastInsertId($this->table);
@@ -53,9 +54,7 @@ final class UserModel extends DefaultModel
 
         $query = $this->pdo->query($stmt, \PDO::FETCH_CLASS, "App\Entity\\$this->entity");
         $userFind = $query->fetch(); 
-var_dump($userFind->getPassword());
-var_dump($password);
-var_dump(password_verify($password, $userFind->getPassword()));
+        
         if ($userFind && password_verify($password, $userFind->getPassword())) {
             $token = (new JwTokenSecurity)->generateToken($userFind->jsonSerialize());
             return [

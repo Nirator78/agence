@@ -77,3 +77,5 @@ CREATE TABLE `agence`.`client` (
   `company` VARCHAR(45) NOT NULL,
   `apikey` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`));
+ALTER TABLE `agence`.`user` 
+CHANGE COLUMN `password` `password` VARCHAR(255) NULL DEFAULT NULL ;
