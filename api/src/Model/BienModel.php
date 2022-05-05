@@ -61,7 +61,7 @@ final class BienModel extends DefaultModel
         $bienInBdd = $this->find($id);
 
         $updatedBien = $bien + $bienInBdd->jsonSerialize();
-        
+        unset($updatedBien["images"]);
         $stmt = "
             UPDATE $this->table SET
             titre = :titre,
