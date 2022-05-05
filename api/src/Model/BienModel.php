@@ -61,7 +61,7 @@ final class BienModel extends DefaultModel
     {
         $bienInBdd = $this->find($id);
 
-        $updatedBien = $bien + $bienInBdd->jsonSerialize(); // Get le bien actuel en bdd
+        $updatedBien = $bien + $bienInBdd->jsonSerialize();
         
         $stmt = "
             UPDATE $this->table SET

@@ -68,4 +68,37 @@ final class UserModel extends DefaultModel
             ];
         }
     }
+
+
+    /**
+     * Modifie un bien de la database
+     * 
+     * @param int $id
+     * @param array $bien
+     * @return ?int
+     */
+    public function updateBien(int $id, array $bien): bool
+    {
+        $bienInBdd = $this->find($id);
+
+        $updatedBien = $bien + $bienInBdd->jsonSerialize();
+        
+        $stmt = "
+            UPDATE $this->table SET
+            titre = :titre,
+            description = :description,
+            type_achat = :type_achat,
+            type_bien = :type_bien,
+            prix = :prix,
+            superficie = :superficie,
+            nbPiece = :nbPiece,
+            piscine = :piscine,
+            balcon = :balcon,
+            terrasse = :terrasse,
+            cheminee = :cheminee
+            WHERE id = :id
+        ";
+        $prepare = $this->pdo->prepare($stmt);
+        return $prepare->execute($updatedBien);
+    }
 }
