@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: 'Agence Immobiliere'
+  description: 'Agence Immobiliere'
+  version: '0.7'
+paths:
+  /api/v1/bien:
+    get:
+      tags:
+        - Bien
+      operationId: 0920b8401b2e1a071c6f96964c5f68a3
+      responses:
+        '200':
+          description: 'The data'
+    post:
+      tags:
+        - Bien
+      operationId: 4d6d7211f5aeb957ddf096629739f620
+      responses:
+        '200':
+          description: 'The data'
+  '/api/v1/bien/:id':
+    get:
+      tags:
+        - Bien
+      operationId: 2b2b3b386979622d9274e6b3aa7f3549
+      responses:
+        '200':
+          description: 'The data'
+    put:
+      tags:
+        - Bien
+      operationId: 40eb5236cec65e4a1b8af75a6c8b4dfe
+      responses:
+        '200':
+          description: 'The data'
+    delete:
+      tags:
+        - Bien
+      operationId: 6a0a3427da5c2336d499c6854b0f45fb
+      responses:
+        '200':
+          description: 'The data'
+  /api/v1/client:
+    post:
+      tags:
+        - Client
+      operationId: fb7f042826a74b2a5feb4a9a8b628fd5
+      responses:
+        '200':
+          description: 'The data'
+  /api/v1/image:
+    get:
+      tags:
+        - Image
+      operationId: 147c3c40f28b7a6c1821c8fe39f778c8
+      responses:
+        '200':
+          description: 'The data'
+    post:
+      tags:
+        - Image
+      operationId: 5b50a3c85b572f67f26f44cb6f4d3a71
+      responses:
+        '200':
+          description: 'The data'
+  '/api/v1/image/:id':
+    get:
+      tags:
+        - Image
+      operationId: fe8d42e3680fb46cc565cbf88dd28edf
+      responses:
+        '200':
+          description: 'The data'
+    put:
+      tags:
+        - Image
+      operationId: 09971ce30e33b775e92d99ddda66213d
+      responses:
+        '200':
+          description: 'The data'
+    delete:
+      tags:
+        - Image
+      operationId: 65dfadb44c599af6978da25e6857b829
+      responses:
+        '200':
+          description: 'The data'
+  /api/v1/rdv:
+    get:
+      tags:
+        - Rdv
+      operationId: f9f81c4d8d13e8a4f2f4f360d0ca406c
+      responses:
+        '200':
+          description: 'The data'
+    post:
+      tags:
+        - Rdv
+      operationId: 357c8f10f7732c87076b05bf88f5512c
+      responses:
+        '200':
+          description: 'The data'
+  '/api/v1/rdv/:id':
+    get:
+      tags:
+        - Rdv
+      operationId: af409ed3d76018523ec458748938536b
+      responses:
+        '200':
+          description: 'The data'
+    put:
+      tags:
+        - Rdv
+      operationId: b2ba275282506511f0ee06bcbf0756d3
+      responses:
+        '200':
+          description: 'The data'
+    delete:
+      tags:
+        - Rdv
+      operationId: 0c6dd4dc16f1d6e0f108fc322c4e0e98
+      responses:
+        '200':
+          description: 'The data'
+  /api/v1/user:
+    get:
+      tags:
+        - User
+      operationId: 66a27162ba1d5b93d59d7d7228059000
+      responses:
+        '200':
+          description: 'The data'
+  '/api/v1/user/:id':
+    get:
+      tags:
+        - User
+      operationId: c3deb2efb34b3b482c61a0ccac32a112
+      responses:
+        '200':
+          description: 'The data'
+    put:
+      tags:
+        - User
+      operationId: fa78b261341180fb684ad554802538fb
+      responses:
+        '200':
+          description: 'The data'
+    post:
+      tags:
+        - User
+      operationId: d540bc13503fea674cbdffc539a41828
+      responses:
+        '200':
+          description: 'The data'
+    delete:
+      tags:
+        - User
+      operationId: 3720b797d305c9a4949cfc86e7eefdab
+      responses:
+        '200':
+          description: 'The data'
+  /api/v1/user/login:
+    post:
+      tags:
+        - User
+      operationId: 169e7966562c900ecdd68b673868376d
+      responses:
+        '200':
+          description: 'The data'

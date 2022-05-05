@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\RdvModel;
 use Core\Controller\DefaultController;
+use OpenApi\Attributes as OA;
 
 final class RdvController extends DefaultController {
 
@@ -13,22 +14,30 @@ final class RdvController extends DefaultController {
         $this->model = new RdvModel();
     }
 
+    #[OA\Get(path: '/api/v1/rdv', tags: ['Rdv'])]
+    #[OA\Response(response: '200', description: 'The data')]
     public function index():void 
     {
         $this->jsonResponse($this->model->findAll());
     }
 
+    #[OA\Get(path: '/api/v1/rdv/:id', tags: ['Rdv'])]
+    #[OA\Response(response: '200', description: 'The data')]
     public function single(int $id)
     {
         $this->jsonResponse($this->model->find($id));
     }
 
+    #[OA\Post(path: '/api/v1/rdv', tags: ['Rdv'])]
+    #[OA\Response(response: '200', description: 'The data')]
     public function save():void 
     {
         $lastId = $this->model->saveRdv($_POST);
         $this->jsonResponse($this->model->find($lastId), 201);
     }
 
+    #[OA\Put(path: '/api/v1/rdv/:id', tags: ['Rdv'])]
+    #[OA\Response(response: '200', description: 'The data')]
     public function update (int $id, array $rdv): void
     {
         if ($this->model->updateRdv(id: $id, rdv: $rdv)) {
@@ -36,6 +45,8 @@ final class RdvController extends DefaultController {
         }
     }
 
+    #[OA\Delete(path: '/api/v1/rdv/:id', tags: ['Rdv'])]
+    #[OA\Response(response: '200', description: 'The data')]
     public function delete (int $id): void
     {
         if ($this->model->delete($id)) {
