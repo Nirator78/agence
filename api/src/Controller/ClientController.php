@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Core\Controller\DefaultController;
 use App\Model\ClientModel;
+use OpenApi\Attributes as OA;
 
 class ClientController extends DefaultController {
 
@@ -17,6 +18,8 @@ class ClientController extends DefaultController {
      * @param array $client
      * @return void
      */
+    #[OA\Post(path: '/api/v1/client', tags: ['Client'])]
+    #[OA\Response(response: '200', description: 'The data')]
     public function save (array $client): void
     {
         // Génère l'apikey
