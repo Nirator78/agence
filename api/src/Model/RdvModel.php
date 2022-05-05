@@ -19,6 +19,9 @@ final class RdvModel extends DefaultModel
         "bien_id" => "",
         "status" => "",
         "email" => "",
+        "nom" => "",
+        "prenom" => "",
+        "tel" => "",
     ];
 
     /**
@@ -31,7 +34,7 @@ final class RdvModel extends DefaultModel
     {
         $newRdv = $rdv + $this->default;
 
-        $stmt = "INSERT INTO $this->table (date,user_id,bien_id,status,email) VALUES (:date,:user_id,:bien_id,:status,:email)";
+        $stmt = "INSERT INTO $this->table (date,user_id,bien_id,status,email,nom,prenom,tel) VALUES (:date,:user_id,:bien_id,:status,:email,:nom,:prenom,:tel)";
         $prepare = $this->pdo->prepare($stmt);
 
         if ($prepare->execute($newRdv)) {

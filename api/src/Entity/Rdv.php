@@ -11,6 +11,9 @@ class Rdv implements JsonSerializable
     private int $bien_id;
     private string $status;
     private string $email;
+    private string $nom;
+    private string $prenom;
+    private string $tel;
     
     /**
      * Get the value of id
@@ -131,6 +134,66 @@ class Rdv implements JsonSerializable
 
         return $this;
     }
+
+    /**
+     * Get the value of nom
+     */ 
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set the value of nom
+     *
+     * @return  self
+     */ 
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of prenom
+     */ 
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set the value of prenom
+     *
+     * @return  self
+     */ 
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of tel
+     */ 
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * Set the value of tel
+     *
+     * @return  self
+     */ 
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
     
     public function jsonSerialize(): mixed{
         return [
@@ -139,7 +202,10 @@ class Rdv implements JsonSerializable
             "bien_id" => $this->getBien_id(),
             "user_id" => $this->getUser_id(),
             "status" => $this->getStatus(),
-            "email" => $this->getEmail()
+            "email" => $this->getEmail(),
+            "nom" => $this->getNom(),
+            "prenom" => $this->getPrenom(),
+            "tel" => $this->getTel()
         ];
     }
 }

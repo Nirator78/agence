@@ -29,6 +29,13 @@ final class BienController extends DefaultController {
         $this->jsonResponse($this->model->find($lastId), 201);
     }
 
+    public function update (int $id, array $bien): void
+    {
+        if ($this->model->updateBien(id: $id, bien: $bien)) {
+            $this->jsonResponse($this->model->find($id));
+        }
+    }
+
     public function delete (int $id): void
     {
         if ($this->model->delete($id)) {

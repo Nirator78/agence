@@ -79,3 +79,7 @@ CREATE TABLE `agence`.`client` (
   PRIMARY KEY (`id`));
 ALTER TABLE `agence`.`user` 
 CHANGE COLUMN `password` `password` VARCHAR(255) NULL DEFAULT NULL ;
+ALTER TABLE `agence`.`rdv` 
+ADD COLUMN `nom` VARCHAR(45) NULL AFTER `email`,
+ADD COLUMN `prenom` VARCHAR(45) NULL AFTER `nom`,
+ADD COLUMN `tel` VARCHAR(45) NULL AFTER `prenom`;

@@ -29,6 +29,13 @@ final class RdvController extends DefaultController {
         $this->jsonResponse($this->model->find($lastId), 201);
     }
 
+    public function update (int $id, array $rdv): void
+    {
+        if ($this->model->updateRdv(id: $id, rdv: $rdv)) {
+            $this->jsonResponse($this->model->find($id));
+        }
+    }
+
     public function delete (int $id): void
     {
         if ($this->model->delete($id)) {

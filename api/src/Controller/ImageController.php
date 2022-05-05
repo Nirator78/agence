@@ -29,6 +29,13 @@ final class ImageController extends DefaultController {
         $this->jsonResponse($this->model->find($lastId), 201);
     }
 
+    public function update (int $id, array $image): void
+    {
+        if ($this->model->updateImage(id: $id, image: $image)) {
+            $this->jsonResponse($this->model->find($id));
+        }
+    }
+
     public function delete (int $id): void
     {
         if ($this->model->delete($id)) {
