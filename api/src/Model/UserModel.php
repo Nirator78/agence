@@ -19,7 +19,7 @@ final class UserModel extends DefaultModel
         "prenom" => "",
         "email" => "",
         "tel" => "",
-        "role" => "",
+        "role" => "user",
         "password" => "",
     ];
 
