@@ -36,6 +36,7 @@ final class BienModel extends DefaultModel
     public function saveBien(array $bien): ?int
     {
         $newBien = $bien + $this->default;
+        var_dump($newBien);
 
         $stmt = "INSERT INTO $this->table (titre,description,type_achat,type_bien,prix,superficie,nbPiece,piscine,balcon,terrasse,cheminee) VALUES (:titre,:description,:type_achat,:type_bien,:prix,:superficie,:nbPiece,:piscine,:balcon,:terrasse,:cheminee)";
         $prepare = $this->pdo->prepare($stmt);
@@ -46,5 +47,38 @@ final class BienModel extends DefaultModel
         } else {
             $this->jsonResponse("Erreur lors de l'insersion d'un bien", 400);
         }
+    }
+
+
+    /**
+     * Modifie un bien de la database
+     * 
+     * @param int $id
+     * @param array $bien
+     * @return ?int
+     */
+    public function updateBien(int $id, array $bien): bool
+    {
+        $bienInBdd = $this->find($id);
+
+        $updatedBien = $bien + $bienInBdd->jsonSerialize(); // Get le bien actuel en bdd
+        
+        $stmt = "
+            UPDATE $this->table SET
+            titre = :titre,
+            description = :description,
+            type_achat = :type_achat,
+            type_bien = :type_bien,
+            prix = :prix,
+            superficie = :superficie,
+            nbPiece = :nbPiece,
+            piscine = :piscine,
+            balcon = :balcon,
+            terrasse = :terrasse,
+            cheminee = :cheminee
+            WHERE id = :id
+        ";
+        $prepare = $this->pdo->prepare($stmt);
+        return $prepare->execute($updatedBien);
     }
 }
