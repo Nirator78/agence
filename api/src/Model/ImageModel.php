@@ -38,4 +38,15 @@ final class ImageModel extends DefaultModel
             $this->jsonResponse("Erreur lors de l'insersion d'un image", 400);
         }
     }
+
+    public function findImageByBien(int $bien_id) {
+        try {
+            $stmt = "SELECT url FROM $this->table WHERE bien_id = $bien_id";
+            $query = $this->pdo->query($stmt, \PDO::FETCH_CLASS, "App\Entity\\$this->entity");
+            return $query->fetchAll();
+        }
+        catch (\PDOException $e) {
+            $this->jsonResponse($e->getMessage(), 400);
+        }
+    }
 }

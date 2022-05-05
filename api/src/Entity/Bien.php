@@ -3,6 +3,8 @@
 namespace App\Entity;
 use JsonSerializable;
 
+use App\Model\ImageModel;
+
 class Bien implements JsonSerializable 
 {
     private int $id;
@@ -259,6 +261,8 @@ class Bien implements JsonSerializable
     }
     
     public function jsonSerialize(): mixed{
+        $imageModel = new ImageModel();
+
         return [
             "id" => $this->getId(),
             "titre" => $this->getTitre(),
@@ -272,6 +276,7 @@ class Bien implements JsonSerializable
             "balcon" => $this->getBalcon(),
             "terrasse" => $this->getTerrasse(),
             "cheminee" => $this->getCheminee(),
+            "images" => $imageModel->findImageByBien($this->getId())
         ];
     }
 }
