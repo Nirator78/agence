@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 use JsonSerializable;
+use App\Model\UserModel;
+use App\Model\BienModel;
+
 
 class Rdv implements JsonSerializable 
 {
@@ -60,7 +63,8 @@ class Rdv implements JsonSerializable
      */ 
     public function getUser_id()
     {
-        return $this->user_id;
+        $userModel = new UserModel();
+        return $userModel->find($this->user_id);
     }
 
     /**
@@ -80,7 +84,8 @@ class Rdv implements JsonSerializable
      */ 
     public function getBien_id()
     {
-        return $this->bien_id;
+        $bienModel = new BienModel();
+        return $bienModel->find($this->bien_id);
     }
 
     /**
