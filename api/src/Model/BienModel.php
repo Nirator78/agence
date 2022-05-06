@@ -28,6 +28,30 @@ final class BienModel extends DefaultModel
     ];
 
     /**
+     * Find all bien avec filtre
+     */
+    public function findAllBien(): array
+    {
+        try {
+            $sql = "SELECT * FROM $this->table";
+            // TODO: gérer la limit if le parametre http limit est set et est un numeric on ajoute un limit mysql
+            if(isset($_GET['limit']) && is_numeric($_GET['limit'])){
+                $sql = $sql." LIMIT ".$_GET['limit'].";";
+            }
+            $query = $this->pdo->query($sql, \PDO::FETCH_CLASS, "App\Entity\\$this->entity");
+
+            return $query->fetchAll();
+        } catch (\PDOException $e) {
+            // s'il y a une erreur, on retourne le message avec un code d'erreur adapté
+            //header("content-type: application/json");
+            // ici le code 400
+            //http_response_code(400);
+            //echo json_encode($e->getMessage());
+            $this->jsonResponse($e->getMessage(), 400);
+        }
+    }
+
+    /**
      * Ajoute un bien a la database
      * 
      * @param array $bien
