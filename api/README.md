@@ -83,3 +83,6 @@ ALTER TABLE `agence`.`rdv`
 ADD COLUMN `nom` VARCHAR(45) NULL AFTER `email`,
 ADD COLUMN `prenom` VARCHAR(45) NULL AFTER `nom`,
 ADD COLUMN `tel` VARCHAR(45) NULL AFTER `prenom`;
+
+ALTER TABLE `agence`.`bien` 
+ADD COLUMN `user_id` INT NULL AFTER `status`;

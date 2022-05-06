@@ -26,6 +26,7 @@ final class BienModel extends DefaultModel
         "terrasse" => false,
         "cheminee" => false,
         "status" => "en_ligne",
+        "user_id" => 0,
     ];
 
     /**
@@ -86,7 +87,7 @@ final class BienModel extends DefaultModel
     {
         $newBien = $bien + $this->default;
 
-        $stmt = "INSERT INTO $this->table (titre,description,type_achat,type_bien,prix,superficie,nbPiece,piscine,balcon,terrasse,cheminee) VALUES (:titre,:description,:type_achat,:type_bien,:prix,:superficie,:nbPiece,:piscine,:balcon,:terrasse,:cheminee)";
+        $stmt = "INSERT INTO $this->table (titre,description,type_achat,type_bien,prix,superficie,nbPiece,piscine,balcon,terrasse,cheminee,status,user_id) VALUES (:titre,:description,:type_achat,:type_bien,:prix,:superficie,:nbPiece,:piscine,:balcon,:terrasse,:cheminee,:status,:user_id)";
         $prepare = $this->pdo->prepare($stmt);
 
         if ($prepare->execute($newBien)) {
@@ -123,7 +124,9 @@ final class BienModel extends DefaultModel
             piscine = :piscine,
             balcon = :balcon,
             terrasse = :terrasse,
-            cheminee = :cheminee
+            cheminee = :cheminee,
+            status = :status,
+            user_id = :user_id
             WHERE id = :id
         ";
         $prepare = $this->pdo->prepare($stmt);
