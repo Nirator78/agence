@@ -16,7 +16,7 @@ final class RdvModel extends DefaultModel
         //"id",
         "date" => "",
         "user_id" => "",
-        "rdv_id" => "",
+        "bien_id" => "",
         "status" => "",
         "email" => "",
         "nom" => "",
