@@ -17,6 +17,7 @@ export default function FormBien({id}) {
         }else {
             await BienService.postBien(data);
         }
+        window.location.reload();
     };
 
     useEffect(() => {
@@ -31,10 +32,10 @@ export default function FormBien({id}) {
                 setValue('prix', bien.prix)
                 setValue('superficie', bien.superficie)
                 setValue('nbPiece', bien.nbPiece)
-                setValue('piscine', bien.piscine)
-                setValue('balcon', bien.balcon)
-                setValue('terrasse', bien.terrasse)
-                setValue('cheminee', bien.cheminee)
+                setValue('piscine', bien.piscine?1:0)
+                setValue('balcon', bien.balcon?1:0)
+                setValue('terrasse', bien.terrasse?1:0)
+                setValue('cheminee', bien.cheminee?1:0)
             }
             
         }
@@ -51,11 +52,14 @@ export default function FormBien({id}) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: 800,
         bgcolor: 'background.paper',
         border: '2px solid #000',
-        boxShadow: 24,
+        boxShadow: 28,
+        overflow:'scroll',
         p: 4,
+        height:'100%',
+        display:'block'
     };
 
     return (
@@ -99,6 +103,130 @@ export default function FormBien({id}) {
                                 placeholder="Déscription"
                                 {...register("description")}
                             />
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="type_bien">
+                                Type du bien
+                            </label>
+                            <select
+                                name="type_bien"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Type de bien"
+                                {...register("type_bien")}
+                                
+                            >
+                                <option value="">Choisir un type de logement</option>
+                                <option value="Maison">Maison</option>
+                                <option value="Appartement">Appartement</option>
+                            </select>
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="type_achat">
+                                Titre achat
+                            </label>
+                            <select
+                                name="type_achat"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Titre achat"
+                                {...register("type_achat")}
+                            > 
+                                <option value="">Choisir un type d'achat</option>
+                                <option value="location">Location</option>
+                                <option value="l'achat">Achat</option>
+                            </select>
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="prix">
+                                Prix
+                            </label>
+                            <input
+                                name="prix"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Prix"
+                                {...register("prix")}
+                            />
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="superficie">
+                                Superficie
+                            </label>
+                            <input
+                                name="superficie"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Superficie"
+                                {...register("superficie")}
+                            />
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="nbPiece">
+                                Nombre de piéce
+                            </label>
+                            <input
+                                name="nbPiece"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Nombre de piéce"
+                                {...register("nbPiece")}
+                            />
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="piscine">
+                                Piscine
+                            </label>
+                            <select
+                                name="piscine"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Piscine"
+                                {...register("piscine")}
+                            >
+                                <option value="">Une piscine ?</option>
+                                <option value={1}>Oui</option>
+                                <option value={0}>Non</option>
+                            </select>
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="balcon">
+                                Balcon
+                            </label>
+                            <select
+                                name="balcon"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Balcon"
+                                {...register("balcon")}
+                            >
+                                <option value="">Un balcon ?</option>
+                                <option value={1}>Oui</option>
+                                <option value={0}>Non</option>
+                            </select>
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="terrasse">
+                                Terrasse
+                            </label>
+                            <select
+                                name="terrasse"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Terrasse"
+                                {...register("terrasse")}
+                            >
+                                <option value="">Une terrasse ?</option>
+                                <option value={1}>Oui</option>
+                                <option value={0}>Non</option>
+                            </select>
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="cheminee">
+                                Cheminée
+                            </label>
+                            <select
+                                name="cheminee"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Cheminée"
+                                {...register("cheminee")}
+                            >
+                                <option value="">Une cheminée ?</option>
+                                <option value={1}>Oui</option>
+                                <option value={0}>Non</option>
+                            </select>
                             <br></br>
                             <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit" />
                         </form>
