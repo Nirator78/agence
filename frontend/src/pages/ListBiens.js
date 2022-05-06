@@ -122,6 +122,7 @@ export default function Accueil() {
                     biens ? biens?.map((item) => {  
                         return (
                             <div className="max-w-sm rounded overflow-hidden shadow-lg m-4" xs={4} key={item.id}>
+                                <img className="w-full" src={  item?.images[0]?.url} alt="Sunset in the mountains"></img>
                                 <div className="px-6 py-4">
                                     <div className="font-bold text-xl mb-2">{item.titre}</div>
                                     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{item.prix} €</span>
