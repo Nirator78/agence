@@ -8,9 +8,9 @@ class AuthService {
         const bodyFormData = new FormData();
         bodyFormData.append('email', email);
         bodyFormData.append('password', password);
-
+        const token = localStorage.getItem('token');
         return axios
-            .post(API_URL + "/user/login?apikey=123456", bodyFormData, { "Content-Type": "multipart/form-data" },)
+            .post(API_URL + "/user/login?apikey=123456", bodyFormData, {headers: { "Content-Type": "multipart/form-data", 'Authorization': token }})
             .then(response => {
                 if (response.data.token) {
                     localStorage.setItem("user", JSON.stringify(response.data.user));

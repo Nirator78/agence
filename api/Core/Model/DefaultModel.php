@@ -15,7 +15,6 @@ class DefaultModel extends Database
         try {
             if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
                 $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
-                var_dump($headers);
             }
             // TODO: gérer la limit if le parametre http limit est set et est un numeric on ajoute un limit mysql
             $stmt = "SELECT * FROM $this->table;";

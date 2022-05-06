@@ -40,6 +40,8 @@ class BienService {
         payload
     ) {
         const bodyFormData = new FormData();
+        const token = localStorage.getItem('token');
+
         bodyFormData.append('titre', payload.titre);
         bodyFormData.append('description', payload.description);
         bodyFormData.append('type_achat', payload.type_achat);
@@ -54,7 +56,7 @@ class BienService {
         bodyFormData.append('user_id', payload.user_id);
 
 
-        return await axios.post(API_URL + '/bien?apikey=123456', bodyFormData,{ "Content-Type": "multipart/form-data" })
+        return await axios.post(API_URL + '/bien?apikey=123456', bodyFormData,{headers: { "Content-Type": "multipart/form-data", 'Authorization': token }})
         .then(response => {
             return response.data;
         });
@@ -66,10 +68,12 @@ class BienService {
         const id = payload.id;
         delete payload.id;
         const data = qs.stringify(payload);
-        console.log(data)
+        const token = localStorage.getItem('token');
+
         const response = await axios.put(API_URL + '/bien/' + id + '?apikey=123456', data,{
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': token
             }
         });
         const bien = await response.data;
@@ -80,9 +84,11 @@ class BienService {
     async deleteBien(
         id
         ) {
+            const token = localStorage.getItem('token');
             const response = await axios.delete(API_URL + '/bien/' + id + '?apikey=123456',{
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token
                 }
             });
             const bien = await response.data;

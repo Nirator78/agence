@@ -42,13 +42,14 @@ class AgentService {
         payload
     ) {
         const bodyFormData = new FormData();
+        const token = localStorage.getItem('token');
         bodyFormData.append('nom', payload.nom);
         bodyFormData.append('prenom', payload.prenom);
         bodyFormData.append('email', payload.email);
         bodyFormData.append('tel', payload.tel);
         bodyFormData.append('password', payload.password);
 
-        return await axios.post(API_URL + '/user?apikey=123456', bodyFormData,{ "Content-Type": "multipart/form-data" })
+        return await axios.post(API_URL + '/user?apikey=123456', bodyFormData, {headers: { "Content-Type": "multipart/form-data", 'Authorization': token }})
         .then(response => {
             return response.data;
         });
@@ -60,10 +61,12 @@ class AgentService {
         const id = payload.id;
         delete payload.id;
         const data = qs.stringify(payload);
-        console.log(data)
+        const token = localStorage.getItem('token');
+
         const response = await axios.put(API_URL + '/user/' + id + '?apikey=123456', data,{
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': token
             }
         });
         const bien = await response.data;
@@ -74,9 +77,12 @@ class AgentService {
     async deleteAgent(
         id
         ) {
+            const token = localStorage.getItem('token');
+
             const response = await axios.delete(API_URL + '/user/' + id + '?apikey=123456',{
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token
                 }
             });
             const user = await response.data;
