@@ -33,10 +33,22 @@ final class BienModel extends DefaultModel
     public function findAllBien(): array
     {
         try {
-            $sql = "SELECT * FROM $this->table";
-            // TODO: gérer la limit if le parametre http limit est set et est un numeric on ajoute un limit mysql
+            $sql = "SELECT * FROM $this->table WHERE id=id";
+
+            if(isset($_GET["type_achat"]) && is_string($_GET["type_achat"])){
+                $sql = $sql." AND type_achat='".$_GET["type_achat"]."'";
+            }
+            if(isset($_GET["type_bien"]) && is_string($_GET["type_bien"])){
+                $sql = $sql." AND type_bien='".$_GET["type_bien"]."'";
+            }
+            if(isset($_GET["nbPiece"]) && is_numeric($_GET["nbPiece"])){
+                $sql = $sql." AND nbPiece=".$_GET["nbPiece"];
+            }
+
             if(isset($_GET['limit']) && is_numeric($_GET['limit'])){
                 $sql = $sql." LIMIT ".$_GET['limit'].";";
+            }else{
+                $sql = $sql.";";
             }
             $query = $this->pdo->query($sql, \PDO::FETCH_CLASS, "App\Entity\\$this->entity");
 
