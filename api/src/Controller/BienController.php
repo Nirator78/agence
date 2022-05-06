@@ -18,7 +18,7 @@ final class BienController extends DefaultController {
     #[OA\Response(response: '200', description: 'The data')]
     public function index():void 
     {
-        $this->jsonResponse($this->model->findAll());
+        $this->jsonResponse($this->model->findAllBien());
     }
 
     #[OA\Get(path: '/api/v1/bien/:id', tags: ['Bien'])]

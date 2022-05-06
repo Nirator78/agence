@@ -28,6 +28,54 @@ final class BienModel extends DefaultModel
     ];
 
     /**
+     * Find all bien avec filtre
+     */
+    public function findAllBien(): array
+    {
+        try {
+            $sql = "SELECT * FROM $this->table WHERE id=id";
+
+            if(isset($_GET["type_achat"]) && is_string($_GET["type_achat"])){
+                $sql = $sql." AND type_achat='".$_GET["type_achat"]."'";
+            }
+            if(isset($_GET["type_bien"]) && is_string($_GET["type_bien"])){
+                $sql = $sql." AND type_bien='".$_GET["type_bien"]."'";
+            }
+            if(isset($_GET["nbPiece"]) && is_numeric($_GET["nbPiece"])){
+                $sql = $sql." AND nbPiece=".$_GET["nbPiece"];
+            }
+            if(isset($_GET["superficieMin"]) && is_numeric($_GET["superficieMin"])){
+                $sql = $sql." AND superficie>=".$_GET["superficieMin"];
+            }
+            if(isset($_GET["superficieMax"]) && is_numeric($_GET["superficieMax"])){
+                $sql = $sql." AND superficie<=".$_GET["superficieMax"];
+            }
+            if(isset($_GET["prixMin"]) && is_numeric($_GET["prixMin"])){
+                $sql = $sql." AND prix>=".$_GET["prixMin"];
+            }
+            if(isset($_GET["prixMax"]) && is_numeric($_GET["prixMax"])){
+                $sql = $sql." AND prix<=".$_GET["prixMax"];
+            }
+
+            if(isset($_GET['limit']) && is_numeric($_GET['limit'])){
+                $sql = $sql." LIMIT ".$_GET['limit'].";";
+            }else{
+                $sql = $sql.";";
+            }
+            $query = $this->pdo->query($sql, \PDO::FETCH_CLASS, "App\Entity\\$this->entity");
+
+            return $query->fetchAll();
+        } catch (\PDOException $e) {
+            // s'il y a une erreur, on retourne le message avec un code d'erreur adapté
+            //header("content-type: application/json");
+            // ici le code 400
+            //http_response_code(400);
+            //echo json_encode($e->getMessage());
+            $this->jsonResponse($e->getMessage(), 400);
+        }
+    }
+
+    /**
      * Ajoute un bien a la database
      * 
      * @param array $bien

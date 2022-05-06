@@ -16,14 +16,14 @@ export default function Accueil(props) {
     }, [])  
     return (
         <>
-        <div className="max-w rounded overflow-hidden shadow-lg">
+        <div className="max-w rounded overflow-hidden shadow-lg grid place-content-center">
             <div className="font-bold text-xl mb-2 text-center">Nos biens disponibles</div>
             <div className='text-center'>
                 <p>Ici vous pouvez retrouver tout nos biens disponible</p> 
                 <p className='font-bold'>Votre futur maison, appartements est ici !</p>
             </div>
             <div className="max-w-lg rounded overflow-hidden shadow-lg ">
-                <div className="flex items-center border-b border-sky-700 py-4 grid grid-cols-3 gap-3 pl-2 pr-2">
+                <div className="items-center border-b border-sky-700 py-4 grid grid-cols-3 gap-3 pl-2 pr-2">
                     <select className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                         <option>Choisir un type de logement</option>
                         <option>Maison</option>
@@ -48,7 +48,9 @@ export default function Accueil(props) {
                     Rechercher
                 </button>
             </div>
-            <FormBien></FormBien>
+            
+        </div>
+        <FormBien></FormBien>
             <div className="grid md:grid-cols-3 sm:grid-cols-2">
                 {
                     biens?.map((item) => {  
@@ -85,7 +87,6 @@ export default function Accueil(props) {
                     })
                 }
             </div>
-        </div>
         </>
     )
 }
