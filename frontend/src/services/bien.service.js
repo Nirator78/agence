@@ -10,7 +10,6 @@ class BienService {
         let url = `${API_URL}/bien/?apikey=123456`;
         for (const [key, value] of Object.entries(data)) {
             if(value){
-                console.log(`${key}: ${value}`);
                 url += `&${key}=${value}`;
             }
         }
@@ -52,6 +51,7 @@ class BienService {
         bodyFormData.append('balcon', payload.balcon);
         bodyFormData.append('terrasse', payload.terrasse);
         bodyFormData.append('cheminee', payload.cheminee);
+        bodyFormData.append('user_id', payload.user_id);
 
 
         return await axios.post(API_URL + '/bien?apikey=123456', bodyFormData,{ "Content-Type": "multipart/form-data" })

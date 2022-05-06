@@ -50,6 +50,7 @@ export default function AccountMenu() {
 	};
 
 	function handleClickLogout(e) {
+		navigate("/");
 		authService.logout();
 	};
 
