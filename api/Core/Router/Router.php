@@ -64,7 +64,7 @@ class Router {
                 }
             }
         } else {
-            // TODO: erreur si pas la route
+            throw new \Exception("Route not found", 404);
         }
     }
 }
