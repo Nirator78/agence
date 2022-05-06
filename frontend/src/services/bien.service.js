@@ -4,26 +4,17 @@ import qs from "qs";
 const API_URL = "http://localhost:3000/api/v1";
 class BienService {
     async getBiens(
-        limit
+        data
     ) {
-        if (limit) {
-            const response = await axios.get(API_URL + '/bien?limit=' + limit + '&apikey=123456',{
+        const params = new URLSearchParams(data).toString();
+            const response = await axios.get(API_URL + '/bien?' + params + '&apikey=123456',{
                 headers: {
                     'Content-Type': 'application/json',
                 }
             });
             const biens = await response.data;
             return biens
-        }
-        else {
-            const response = await axios.get(API_URL + '/bien?apikey=123456',{
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            const biens = await response.data;
-            return biens
-        }
+        
     }
 
     async getBien(

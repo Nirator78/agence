@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import FormBien from '../component/subForm/FormBien';
 import BienService from '../services/bien.service';
@@ -7,6 +8,11 @@ import BienService from '../services/bien.service';
 export default function Accueil(props) {
     const [biens, setBiens] = useState([]);
     const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const onSubmit = async (data) => {
+        await BienService.getBien(data);
+    };
     useEffect(() => {
         async function fetchData() {
             const response = await BienService.getBiens();
@@ -22,35 +28,72 @@ export default function Accueil(props) {
                 <p>Ici vous pouvez retrouver tout nos biens disponible</p> 
                 <p className='font-bold'>Votre futur maison, appartements est ici !</p>
             </div>
-            <div className="max-w-lg rounded overflow-hidden shadow-lg ">
-                <div className="items-center border-b border-sky-700 py-4 grid grid-cols-3 gap-3 pl-2 pr-2">
-                    <select className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                        <option>Choisir un type de logement</option>
-                        <option>Maison</option>
-                        <option>Appartement</option>
-                    </select>
-                    <select className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                        <option>Choisir un type d'achat</option>
-                        <option>Location</option>
-                        <option>Achat</option>
-                    </select>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="piece" type="text" placeholder="Nombre de pièce"></input>
-                    <div>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 mb-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="piece" type="text" placeholder="Superficie mini"></input>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="piece" type="text" placeholder="Superficie max"></input>
+            <FormBien></FormBien>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="max-w-lg rounded overflow-hidden shadow-lg mb-2 ">
+                    <div className="items-center border-b border-sky-700 py-4 grid grid-cols-3 gap-3 pl-2 pr-2">
+                        <select {...register("type_bien")} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="">Choisir un type de logement</option>
+                            <option value="maison">Maison</option>
+                            <option value="appartement">Appartement</option>
+                        </select>
+                        <select {...register("type_achat")} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="">Choisir un type d'achat</option>
+                            <option value="location">Location</option>
+                            <option value="l'achat">Achat</option>
+                        </select>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            id="piece" 
+                            type="text" 
+                            placeholder="Nombre de pièce"
+                            {...register("nbPiece")}
+                        >
+                        </input>
+                        <div>
+                            <input className="shadow appearance-none border rounded w-full py-2 px-3 mb-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                id="superficieMini" 
+                                type="text" 
+                                placeholder="Superficie mini"
+                                {...register("superficieMini")}
+                                >
+                            </input>
+                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                id="superficieMax" 
+                                type="text" 
+                                placeholder="Superficie max"
+                                {...register("superficieMax")}
+
+                            >
+
+                            </input>
+                        </div>
+                        <div>
+                            <input className="shadow appearance-none border rounded w-full py-2 px-3 mb-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="prixMini" 
+                                type="text" 
+                                placeholder="Prix mini"
+                                {...register("prixMini")}
+
+                            >
+                            </input>
+                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                id="prixMax" 
+                                type="text" 
+                                placeholder="Prix max"
+                                {...register("prixMax")}
+
+                            >
+
+                            </input>
+                        </div>
                     </div>
-                    <div>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 mb-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="piece" type="text" placeholder="Prix mini"></input>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="piece" type="text" placeholder="Prix max"></input>
-                    </div>
+                    <button className="bg-sky-700 hover:bg-sky-600 text-white font-bold py-2 px-4 m-2 rounded " type="submit">
+                        Rechercher
+                    </button>
                 </div>
-                <button className="bg-sky-700 hover:bg-sky-600 text-white font-bold py-2 px-4 m-2 rounded ">
-                    Rechercher
-                </button>
-            </div>
+            </form>
             
         </div>
-        <FormBien></FormBien>
             <div className="grid md:grid-cols-3 sm:grid-cols-2">
                 {
                     biens?.map((item) => {  
