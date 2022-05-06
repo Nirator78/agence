@@ -20,6 +20,7 @@ function RendezVous({bien}) {
 	async function postData() {
 		rendezVousService.postRendezUnvous(values.email, values.date, values.nom, values.prenom, values.tel, values.status, bien).then(
 			() => {
+				console.log("Email envoyé !!!");
 				window.location.reload();
 			},
 			error => {
