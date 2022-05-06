@@ -25,6 +25,7 @@ final class BienModel extends DefaultModel
         "balcon" => false,
         "terrasse" => false,
         "cheminee" => false,
+        "status" => "en_ligne",
     ];
 
     /**
@@ -33,7 +34,7 @@ final class BienModel extends DefaultModel
     public function findAllBien(): array
     {
         try {
-            $sql = "SELECT * FROM $this->table WHERE id=id";
+            $sql = "SELECT * FROM $this->table WHERE status='en_ligne'";
 
             if(isset($_GET["type_achat"]) && is_string($_GET["type_achat"])){
                 $sql = $sql." AND type_achat='".$_GET["type_achat"]."'";
