@@ -40,6 +40,7 @@ export default function AccountMenu() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
 	const navigate = useNavigate();
+	const user = authService.getUser();
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -73,9 +74,11 @@ export default function AccountMenu() {
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
+				{user?.role === "admin" && (
 				<MenuItem onClick={() => navigate('/inscription')}>
 					Inscrire un agent
 				</MenuItem>
+				)}
 				<Divider />
 				<MenuItem onClick={handleClickLogout}>
 					Déconnexion
