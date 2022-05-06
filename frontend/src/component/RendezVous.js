@@ -59,13 +59,13 @@ function RendezVous({bien}) {
 					aria-describedby="modal-modal-description"
 				>
 					<Box sx={style}>
-						<form class="bg-white px-8 pt-6 pb-8 mb-4" >
-							<div class="mb-4">
-								<label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+						<form className="bg-white px-8 pt-6 pb-8 mb-4" >
+							<div className="mb-4">
+								<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
 									Email
 								</label>
 								<input 
-									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
 									id="email" 
 									type="text" 
 									placeholder="Email"
@@ -73,12 +73,12 @@ function RendezVous({bien}) {
 									onChange={handleChange('email')}
 								/>
 							</div>
-							<div class="mb-4">
-								<label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="nom">
+							<div className="mb-4">
+								<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nom">
 									Nom
 								</label>
 								<input 
-									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
 									id="nom" 
 									type="text" 
 									placeholder="Nom"
@@ -86,12 +86,12 @@ function RendezVous({bien}) {
 									onChange={handleChange('nom')}
 								/>
 							</div>
-							<div class="mb-4">
-								<label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="prenom">
+							<div className="mb-4">
+								<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="prenom">
 									Prénom
 								</label>
 								<input 
-									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
 									id="prenom" 
 									type="text" 
 									placeholder="Prénom"
@@ -99,12 +99,12 @@ function RendezVous({bien}) {
 									onChange={handleChange('prenom')}
 								/>
 							</div>						
-							<div class="mb-4">
-								<label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="tel">
+							<div className="mb-4">
+								<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tel">
 									Téléphone
 								</label>
 								<input 
-									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
 									id="tel" 
 									type="text" 
 									placeholder="Téléphone"
@@ -112,20 +112,20 @@ function RendezVous({bien}) {
 									onChange={handleChange('tel')}
 								/>
 							</div>
-							<div class="mb-6">
-							<label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
+							<div className="mb-6">
+							<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
 								Date
 							</label>
 							<input 
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+								className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
 								id="date" 
 								type="date"
 								value={values.date}
 								onChange={handleChange('date')}
 								/>
 							</div>
-							<div class="flex items-center justify-between">
-							<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={postData}>
+							<div className="flex items-center justify-between">
+							<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={postData}>
 								Prendre un rendez-vous
 							</button>
 							</div>
