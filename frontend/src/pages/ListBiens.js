@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import FormBien from '../component/subForm/FormBien';
 import BienService from '../services/bien.service';
 
-export default function Accueil(props) {
+export default function Accueil() {
     const [biens, setBiens] = useState([]);
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-        await BienService.getBien(data);
+        const response = await BienService.getBiens(data);
+        setBiens(response);
     };
     useEffect(() => {
         async function fetchData() {
@@ -40,7 +41,7 @@ export default function Accueil(props) {
                         <select {...register("type_achat")} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                             <option value="">Choisir un type d'achat</option>
                             <option value="location">Location</option>
-                            <option value="l'achat">Achat</option>
+                            <option value="achat">Achat</option>
                         </select>
                         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                             id="piece" 
@@ -96,7 +97,7 @@ export default function Accueil(props) {
         </div>
             <div className="grid md:grid-cols-3 sm:grid-cols-2">
                 {
-                    biens?.map((item) => {  
+                    biens ? biens?.map((item) => {  
                         return (
                             <div className="max-w-sm rounded overflow-hidden shadow-lg m-4" xs={4} key={item.id}>
                                 <div className="px-6 py-4">
@@ -127,7 +128,7 @@ export default function Accueil(props) {
                                 </div>
                             </div>
                         )
-                    })
+                    }) : null
                 }
             </div>
         </>
