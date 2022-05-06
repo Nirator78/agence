@@ -4,9 +4,9 @@ import BienService from '../services/bien.service';
 export default function Accueil(props) {
     const [biens, setBiens] = useState([]);
 
-    useEffect(() => {
+    useEffect((data) => {
         async function fetchData() {
-            const response = await BienService.getBiens(5);
+            const response = await BienService.getBiens({...data, limit:5});
             setBiens(response);
         }
         fetchData();
