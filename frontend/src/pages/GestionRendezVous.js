@@ -20,8 +20,7 @@ export default function GestionRendezVous(props) {
             </div>
             <div className="grid md:grid-cols-3 sm:grid-cols-2">
                 {
-                    rendezVous
-                    ?.map((item) => {  
+                    rendezVous?.map((item) => {  
                         return (
                             <div className="max-w-sm rounded overflow-hidden shadow-lg m-4" xs={4} key={item.id}>
                                 <div className="px-6 py-4">

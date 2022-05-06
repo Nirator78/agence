@@ -4,9 +4,11 @@ const API_URL = "http://localhost:3000/api/v1"
 class RendezVousService {
     async getRendezvous(
     ) {
+        const token = localStorage.getItem('token');
         const response = await axios.get(API_URL + '/rdv?apikey=123456',{
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token
             }
         });
         const rdv = await response.data;
@@ -16,9 +18,11 @@ class RendezVousService {
     async getRendezUnvous(
         id
     ) {
+        const token = localStorage.getItem('token');
         const response = await axios.get(API_URL + '/rdv/' + id + '?apikey=123456',{
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token
             }
         });
         const rdv = await response.data;
@@ -27,7 +31,6 @@ class RendezVousService {
     }
 
     postRendezUnvous(email, date, nom, prenom, tel, status, bien) {
-        console.log(bien)
         const bodyFormData = new FormData();
         bodyFormData.append('email', email);
         bodyFormData.append('date', date);
@@ -40,9 +43,8 @@ class RendezVousService {
             bodyFormData.append('status', "en_attente");
         }
         bodyFormData.append('bien_id', bien);
-
         return axios
-            .post(API_URL + "/rdv?apikey=123456", bodyFormData, { "Content-Type": "multipart/form-data" },)
+            .post(API_URL + "/rdv?apikey=123456", bodyFormData,{headers: { "Content-Type": "multipart/form-data"}})
             .then(response => {
                 return response.data;
             });
@@ -51,9 +53,11 @@ class RendezVousService {
     async deleteRendezvous(
         id
         ) {
+            const token = localStorage.getItem('token');
             const response = await axios.delete(API_URL + '/rdv/' + id + '?apikey=123456',{
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token
                 }
             });
             const rdv = await response.data;
