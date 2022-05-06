@@ -45,7 +45,7 @@ function Bien(props) {
                     {bien.terrasse ? <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> Terrasse </span> : <></>}
                 </div>
                 <RendezVous bien={bien.id}/>
-                {user?.role === "admin" && (
+                {(user?.role === "admin" || user?.id === bien.user_id) && (
                 <div className='flex'>
                 <FormBien id={bien.id} />         
                     <button className="flex py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-700 hover:bg-red-600" onClick={async () => await bienService.deleteBien(bien.id) &&  navigate(`/bien`) }>

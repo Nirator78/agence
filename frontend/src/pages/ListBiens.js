@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import FormBien from '../component/subForm/FormBien';
+import authService from '../services/auth.service';
 import BienService from '../services/bien.service';
 
 export default function Accueil() {
     const [biens, setBiens] = useState([]);
+    const [nbBien, setNbBiens] = useState([]);
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -14,13 +16,16 @@ export default function Accueil() {
         const response = await BienService.getBiens(data);
         setBiens(response);
     };
-    useEffect(() => {
+    useEffect((data) => {
         async function fetchData() {
-            const response = await BienService.getBiens();
+            const response = await BienService.getBiens({...data, limit: 10});
+            const response1 = await BienService.getBiens({...data});
             setBiens(response);
+            setNbBiens(response1);
         }
         fetchData();
     }, [])  
+    const user = authService.getUser();
     return (
         <>
         <div className="max-w rounded overflow-hidden shadow-lg grid place-content-center">
@@ -29,7 +34,8 @@ export default function Accueil() {
                 <p>Ici vous pouvez retrouver tout nos biens disponible</p> 
                 <p className='font-bold'>Votre futur maison, appartements est ici !</p>
             </div>
-            <FormBien></FormBien>
+            { user?.role === "admin" && (<FormBien></FormBien>)}
+            
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="max-w-lg rounded overflow-hidden shadow-lg mb-2 ">
                     <div className="items-center border-b border-sky-700 py-4 grid grid-cols-3 gap-3 pl-2 pr-2">
@@ -88,6 +94,22 @@ export default function Accueil() {
                             </input>
                         </div>
                     </div>
+                    <div className='flex px-2 py-2'>
+                        <select
+                            name="limit"
+                            className="form-control block py-2 px-3 ml-2 mr-2 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                            border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                            {...register("limit")}
+                            
+                        > 
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                        </select>
+                        / {nbBien.length} nombre logements (hors filtre)
+                    </div>
                     <button className="bg-sky-700 hover:bg-sky-600 text-white font-bold py-2 px-4 m-2 rounded " type="submit">
                         Rechercher
                     </button>
@@ -130,7 +152,9 @@ export default function Accueil() {
                         )
                     }) : null
                 }
+
             </div>
+            
         </>
     )
 }

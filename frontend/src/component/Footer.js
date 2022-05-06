@@ -111,9 +111,9 @@ export default function Footer() {
       </a>
     </div>
     <p className='text-gray-800'>Nos cordonnées</p>
-    <p className='text-gray-800'>📌Adresse : </p>
-    <p className='text-gray-800'>📞 Tel : </p>
-    <p className='text-gray-800'>📧 Email : </p>
+    <p className='text-gray-800'>📌Adresse : Rue de l'IPSSI</p>
+    <p className='text-gray-800'>📞 Tel : 012535 a toi de trouver la suite 😉</p>
+    <p className='text-gray-800'>📧 Email : unnom@ecole-ipssi.net</p>
   </div>
 
   <div className="text-center text-gray-700 p-4">

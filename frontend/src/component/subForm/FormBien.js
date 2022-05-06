@@ -36,6 +36,7 @@ export default function FormBien({id}) {
                 setValue('balcon', bien.balcon?1:0)
                 setValue('terrasse', bien.terrasse?1:0)
                 setValue('cheminee', bien.cheminee?1:0)
+                setValue('user_id', bien.user_id)
             }
             
         }
@@ -83,6 +84,20 @@ export default function FormBien({id}) {
                     </Typography>
                     <>
                         <form onSubmit={handleSubmit(onSubmit)}>
+                            {id &&(
+                                <select
+                                    name="status"
+                                    className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                    border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                    placeholder="Status"
+                                    {...register("status")}
+                                > 
+                                    <option value="en_ligne">En ligne</option>
+                                    <option value="vendu">Vendu</option>
+                                </select>
+                            )
+                            }
+                            
                             <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="titre">
                                 Titre du bien
                             </label>
@@ -227,6 +242,17 @@ export default function FormBien({id}) {
                                 <option value={1}>Oui</option>
                                 <option value={0}>Non</option>
                             </select>
+                            <br></br>
+                            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="user_id">
+                                Gestion du bien
+                            </label>
+                            <input
+                                name="user_id"
+                                className="form-control w-full block py-2 px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0"
+                                placeholder="Gestion du bien"
+                                {...register("user_id")}
+                            />
                             <br></br>
                             <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit" />
                         </form>

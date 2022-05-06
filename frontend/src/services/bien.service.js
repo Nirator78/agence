@@ -10,7 +10,6 @@ class BienService {
         let url = `${API_URL}/bien/?apikey=123456`;
         for (const [key, value] of Object.entries(data)) {
             if(value){
-                console.log(`${key}: ${value}`);
                 url += `&${key}=${value}`;
             }
         }
