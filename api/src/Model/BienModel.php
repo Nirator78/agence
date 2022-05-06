@@ -44,6 +44,18 @@ final class BienModel extends DefaultModel
             if(isset($_GET["nbPiece"]) && is_numeric($_GET["nbPiece"])){
                 $sql = $sql." AND nbPiece=".$_GET["nbPiece"];
             }
+            if(isset($_GET["superficieMin"]) && is_numeric($_GET["superficieMin"])){
+                $sql = $sql." AND superficie>=".$_GET["superficieMin"];
+            }
+            if(isset($_GET["superficieMax"]) && is_numeric($_GET["superficieMax"])){
+                $sql = $sql." AND superficie<=".$_GET["superficieMax"];
+            }
+            if(isset($_GET["prixMin"]) && is_numeric($_GET["prixMin"])){
+                $sql = $sql." AND prix>=".$_GET["prixMin"];
+            }
+            if(isset($_GET["prixMax"]) && is_numeric($_GET["prixMax"])){
+                $sql = $sql." AND prix<=".$_GET["prixMax"];
+            }
 
             if(isset($_GET['limit']) && is_numeric($_GET['limit'])){
                 $sql = $sql." LIMIT ".$_GET['limit'].";";
