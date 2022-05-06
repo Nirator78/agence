@@ -62,7 +62,7 @@ export default function FormBien({id}) {
         <>
             <button
             onClick={handleOpen}
-            className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-700 hover:bg-green-600"
+            className="w-1/4 flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-700 hover:bg-green-600"
             >
             { id ? 'Modifier' : 'Crée'}
             </button>
