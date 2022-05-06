@@ -15,7 +15,7 @@ class Router {
                 $securityJwt = new JwTokenSecurity();
                 switch ($_SERVER["REQUEST_METHOD"]) {
                     case "GET":
-                        if (isset($path[4]) && is_numeric($path[4]) && $securityJwt->tokenNeeded(false)) {
+                        if (isset($path[4]) && is_numeric($path[4])) {
                             $controller->single($path[4]);
                         } else {
                             $controller->index();

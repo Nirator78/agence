@@ -86,3 +86,6 @@ ADD COLUMN `tel` VARCHAR(45) NULL AFTER `prenom`;
 
 ALTER TABLE `agence`.`bien` 
 ADD COLUMN `user_id` INT NULL AFTER `status`;
+
+ALTER TABLE `agence`.`image` 
+CHANGE COLUMN `url` `url` VARCHAR(255) NULL DEFAULT NULL ;
