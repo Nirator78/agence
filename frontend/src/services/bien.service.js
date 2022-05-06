@@ -6,14 +6,21 @@ class BienService {
     async getBiens(
         data
     ) {
-        const params = new URLSearchParams(data).toString();
-            const response = await axios.get(API_URL + '/bien?' + params + '&apikey=123456',{
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            const biens = await response.data;
-            return biens
+        if(!data) data={};
+        let url = `${API_URL}/bien/?apikey=123456`;
+        for (const [key, value] of Object.entries(data)) {
+            if(value){
+                console.log(`${key}: ${value}`);
+                url += `&${key}=${value}`;
+            }
+        }
+        const response = await axios.get(url,{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const biens = await response.data;
+        return biens || [];
         
     }
 
