@@ -22,7 +22,16 @@ function Bien(props) {
 
     return (
         <div className="grid md:grid-cols-3 sm:grid-cols-2">
-            <div className="max-w-sm rounded overflow-hidden shadow-lg m-4" xs={4} key={bien.id}>
+            <div className="rounded overflow-hidden shadow-lg" xs={4} key={bien.id}>
+            {
+                   bien?.images?.map((item) => {  
+                        return (
+                            <div className="flex">
+                                <img className="max-w-sm" src={  item.url} alt="Sunset in the mountains"></img>
+                            </div>
+                        )
+                })
+            }
                 <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{bien.titre}</div>
                     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{bien.prix} €</span>
