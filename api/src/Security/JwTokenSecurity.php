@@ -33,7 +33,7 @@ class JwTokenSecurity {
     public function decodeToken (): array
     {
         $headers = getallheaders();
-        $token = $headers['token'];
+        $token = $headers['Authorization'];
 
         return (array) JWT::decode($token, new Key(self::SIGNATURE, self::ALGO));
     }
@@ -41,12 +41,10 @@ class JwTokenSecurity {
     public function tokenNeeded ($need)
     {
         $headers = getallheaders();
-        $token = $headers['token'];
-
-        if(!isset($token) && $need){
-            return false; 
+        if(isset($headers['Authorization']) && $need){   
+            return true;
+        }else{
+            return false;
         }
-
-        return true;
     }
 }

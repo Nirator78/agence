@@ -1,6 +1,8 @@
 <?php
 namespace Core\Router;
 
+use App\Security\JwTokenSecurity;
+
 class Router {
 
     public static function router ()
@@ -10,10 +12,10 @@ class Router {
             if (isset($path[3])) {
                 $controllerName = "App\Controller\\".ucfirst($path[3]). "Controller";
                 $controller = new $controllerName;
-                
+                $securityJwt = new JwTokenSecurity();
                 switch ($_SERVER["REQUEST_METHOD"]) {
                     case "GET":
-                        if (isset($path[4]) && is_numeric($path[4])) {
+                        if (isset($path[4]) && is_numeric($path[4]) && $securityJwt->tokenNeeded(false)) {
                             $controller->single($path[4]);
                         } else {
                             $controller->index();
@@ -25,19 +27,27 @@ class Router {
                             $method = $path[4];
                             $controller->$method();
                         }else{
-                            $controller->save();
+                            if(ucfirst($path[3]) == "Rdv"){
+                                $controller->save();
+                            }else{
+                                if($securityJwt->tokenNeeded(true)){
+                                    $controller->save();
+                                }else{
+                                    throw new \Exception("Token manquant", 400);                                    
+                                }
+                            }
                         }
                         break;
                     case "DELETE":
-                        if (isset($path[4]) && is_numeric($path[4])) {
+                        if (isset($path[4]) && is_numeric($path[4]) && $securityJwt->tokenNeeded(true)) {
                             $controller->delete($path[4]);
                         } else {
-                            throw new \Exception("Id manquant", 400);
+                            throw new \Exception("Id manquant ou pas de token", 400);
                         }
                         break;
                     case "PUT":
                         parse_str(file_get_contents("php://input"), $_PUT);
-                        if (isset($path[4]) && !empty($_PUT)) {
+                        if (isset($path[4]) && !empty($_PUT) && $securityJwt->tokenNeeded(true)) {
                             $controller->update($path[4], $_PUT);
                         } else {
                             throw new \Exception("Erreur lors de la modification, il manque des informations", 400);
@@ -45,7 +55,7 @@ class Router {
                         break;
                     case "PATCH":
                         parse_str(file_get_contents("php://input"), $_PATCH);
-                        if (isset($path[4]) && !empty($_PATCH)) {
+                        if (isset($path[4]) && !empty($_PATCH) && $securityJwt->tokenNeeded(true)) {
                             $controller->update($path[4], $_PATCH);
                         } else {
                             throw new \Exception("Erreur lors de la modification, il manque des informations", 400);
