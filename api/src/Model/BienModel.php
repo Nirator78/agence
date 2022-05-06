@@ -58,6 +58,9 @@ final class BienModel extends DefaultModel
             if(isset($_GET["prixMax"]) && is_numeric($_GET["prixMax"])){
                 $sql = $sql." AND prix<=".$_GET["prixMax"];
             }
+            if(isset($_GET["user"]) && is_numeric($_GET["user"])){
+                $sql = $sql." AND user_id=".$_GET["user"];
+            }
 
             if(isset($_GET['limit']) && is_numeric($_GET['limit'])){
                 $sql = $sql." LIMIT ".$_GET['limit'].";";
