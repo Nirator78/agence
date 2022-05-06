@@ -30,7 +30,7 @@ export default function Headers() {
                     <NavLink className={({ isActive }) => (isActive ? 'text-sky-700 mr-4' : 'text-dark-200 mr-4 hover:text-sky-700')} to="/bien">
                         Liste des biens
                     </NavLink>
-                    {user?.role === "ROLE_ADMIN" && (
+                    {user?.role === "admin" && (
                         <>
                         <NavLink className={({ isActive }) => (isActive ? 'text-sky-700 mr-4' : 'text-dark-200 mr-4 hover:text-sky-700')} to="/gestion-rendez-vous">
                             Gestion rendez-vous
