@@ -79,6 +79,7 @@ function Connexion(props) {
 										value={values.password}
 										onChange={handleChange('password')}
 										sx={{ width: 1 }}
+										type="password"
 									/>
 								</FormControl>
                                 <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-700 hover:bg-sky-600" onClick={postData}>

@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import FormAgent from '../component/subForm/FormAgent';
 import AgentService from '../services/agent.service';
 
 export default function GestionAgent(props) {
@@ -18,6 +19,7 @@ export default function GestionAgent(props) {
             <div className='text-center'>
                 <p>Ici vous pouvez retrouver tout les agents</p> 
             </div>
+            <FormAgent></FormAgent>
             <div className="grid md:grid-cols-3 sm:grid-cols-2">
                 {
                     agent?.map((item) => {  
@@ -35,9 +37,7 @@ export default function GestionAgent(props) {
                                         {item.tel}
                                     </p>    
                                     <div className='flex'>
-                                        <button className="flex py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-700 hover:bg-green-600">
-                                            Modifier  
-                                        </button>          
+                                        <FormAgent id={item.id}/>       
                                         <button className="flex py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-700 hover:bg-red-600" onClick={async () => await AgentService.deleteAgent(item.id) &&  window.location.reload() }>
                                             Supprimer  
                                         </button> 
