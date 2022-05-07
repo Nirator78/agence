@@ -15,11 +15,26 @@ class Router {
                 $securityJwt = new JwTokenSecurity();
                 switch ($_SERVER["REQUEST_METHOD"]) {
                     case "GET":
-                        if (isset($path[4]) && is_numeric($path[4])) {
-                            $controller->single($path[4]);
-                        } else {
-                            $controller->index();
-                        }
+                        // Si route égal bien on vérifie pas le token
+                        // Sinon on vérifie
+
+                        if (ucfirst($path[3]) == "Bien") {
+                            if (isset($path[4]) && is_numeric($path[4])) {
+                                $controller->single($path[4]);
+                            } else {
+                                $controller->index();
+                            }
+                        }else{
+                            if($securityJwt->tokenNeeded(true)){
+                                if (isset($path[4]) && is_numeric($path[4])) {
+                                    $controller->single($path[4]);
+                                } else {
+                                    $controller->index();
+                                }
+                            }else{
+                                throw new \Exception("Token manquant", 400);  
+                            }
+                        }                        
                         break;
                     case "POST":
                         if(isset($path[4]) && is_string($path[4])) 
