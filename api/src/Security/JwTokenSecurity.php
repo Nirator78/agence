@@ -32,10 +32,18 @@ class JwTokenSecurity {
 
     public function decodeToken (): array
     {
+        // On récupère les en-tête de la requête
         $headers = getallheaders();
-        $token = $headers['Authorization'];
-
-        return (array) JWT::decode($token, new Key(self::SIGNATURE, self::ALGO));
+        // On récupère la clé Authorization de l'en-tête
+        $authorization = $headers['Authorization'];
+        // On split la chaine pour enlber le Bearer au début
+        $authorizationSplited = explode(" ",$authorization);
+        // On met le token dans $token
+        $token = $authorizationSplited[1];
+        // On décrypt les infos dans le token
+        $decoded = JWT::decode($token, new Key(self::SIGNATURE, self::ALGO));
+        // On renvoie l'utilisateur connecter qui est decrypté
+        return (array) $decoded;
     }
 
     public function tokenNeeded ($need)

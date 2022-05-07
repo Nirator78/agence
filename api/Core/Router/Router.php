@@ -43,12 +43,20 @@ class Router {
                         }else{
                             if(ucfirst($path[3]) == "Rdv"){
                                 $controller->save();
-                            }else{
-                                if($securityJwt->tokenNeeded(true)){
-                                    $controller->save();
+                            }elseif($securityJwt->tokenNeeded(true)){
+                                // Si la route est la création de user on vérifie que la personne soit admin
+                                if(ucfirst($path[3]) == "User"){
+                                    $userConnected = $securityJwt->decodeToken();
+                                    if($userConnected["role"] == "admin"){
+                                        $controller->save();
+                                    }else{
+                                        throw new \Exception("Utilisateur pas administrateur", 400); 
+                                    }
                                 }else{
-                                    throw new \Exception("Token manquant", 400);                                    
+                                    $controller->save();  
                                 }
+                            }else{
+                                throw new \Exception("Token manquant", 400);   
                             }
                         }
                         break;
