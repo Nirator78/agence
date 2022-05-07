@@ -17,7 +17,6 @@ class Router {
                     case "GET":
                         // Si route égal bien on vérifie pas le token
                         // Sinon on vérifie
-
                         if (ucfirst($path[3]) == "Bien") {
                             if (isset($path[4]) && is_numeric($path[4])) {
                                 $controller->single($path[4]);
